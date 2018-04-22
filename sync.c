@@ -13,11 +13,12 @@ int createDir(char *filename) { //creates a new directory
 }
 
 int createFile(char *filename1, char *filename2) { //copies filename1 to a new file at filename2
-    char command[7+strlen(filename1)+strlen(filename2)];
-    strcpy(command, "copy ");
+    char command[11+strlen(filename1)+strlen(filename2)];
+    strcpy(command, "copy \"");
     strcat(command, filename1);
-    strcat(command, " ");
+    strcat(command, "\" \"");
     strcat(command, filename2);
+    strcat(command, "\"");
     printf("%s\n", command);
     return system(command); //runs "copy filename1 filename2" on the system
 }
@@ -39,8 +40,8 @@ int isDir(char *filename) { //returns 1 if file is directory, 0 otherwise
 
 int main() {
     //setup variables
-    const char folder1path[260]="C:\\Users\\Josh\\Desktop\\empire"; //these variables are the folders to sync
-    const char folder2path[260]="C:\\Users\\Josh\\Desktop\\rebellion";
+    const char folder1path[260]="C:\\Users\\Josh\\Documents\\AFIT\\Spring\\544"; //these variables are the folders to sync
+    const char folder2path[260]="A:\\Spring\\544";
     char fullpath1[260]; //these variables are used for comparisons
     char fullpath2[260];
     struct dirent *dir; //declare dirent struct
