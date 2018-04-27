@@ -3,8 +3,6 @@
 #include <dirent.h> //opendir, readdir
 #include <sys/stat.h> //used to pull info about files
 #include <stdlib.h> //exit
-const char folder1path[260]="C:\\Users\\Josh\\Documents\\AFIT\\Spring\\544"; //these variables are the folders to sync
-const char folder2path[260]="A:\\Spring\\544";
 int createDir(char *filename) { //creates a new directory
     char command[7+strlen(filename)];
     strcpy(command, "mkdir ");
@@ -39,10 +37,20 @@ int isDir(char *filename) { //returns 1 if file is directory, 0 otherwise
         return 0;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    //Check number of arguments
+    if (argc != 3) {
+        printf("Invalid number of arguments.");
+        return 1;
+    }
+    
     //setup variables
+    char folder1path[260];
+    char folder2path[260];
     char fullpath1[260]; //these variables are used for comparisons
-    char fullpath2[260];
+    char fullpath2[260]; 
+    strncpy(folder1path, argv[1], 260);
+    strncpy(folder2path, argv[2], 260);
     struct dirent *dir; //declare dirent struct
     DIR *dp = opendir(folder1path); //attempt to open directory, dp is directory pointer
     if (dp == NULL) { //if directory cannot be opened, exit program
